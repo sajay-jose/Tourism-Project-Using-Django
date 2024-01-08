@@ -1,0 +1,244 @@
+{% extends 'User/UserHome.html' %}
+{% block content %}
+  <title>Booking details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+    table {
+        border-collapse: collapse;
+        margin: 10px auto;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        width: 100%; /* Make the table take up full width */
+    }
+
+    th,
+    td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: black;
+        color: white;
+    }
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    
+      .rate {
+        float: left;
+        height: 46px;
+        padding: 0 10px;
+      }
+    
+      .rate:not(:checked)>input {
+        position: absolute;
+        top: -9999px;
+      }
+    
+      .rate:not(:checked)>label {
+        float: right;
+        width: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 30px;
+        color: #ccc;
+      }
+    
+      .rate:not(:checked)>label:before {
+        content: '★ ';
+      }
+    
+      .rate>input:checked~label {
+        color: #ffc700;
+      }
+    
+      .rate:not(:checked)>label:hover,
+      .rate:not(:checked)>label:hover~label {
+        color: #deb217;
+      }
+    
+      .rate>input:checked+label:hover,
+      .rate>input:checked+label:hover~label,
+      .rate>input:checked~label:hover,
+      .rate>input:checked~label:hover~label,
+      .rate>label:hover~input:checked~label {
+        color: #c59b08;
+      }
+    
+    </style>
+
+
+  <section>
+
+    <h4 style="text-align: center; margin-top: 100px;">Booking Details</h4>
+    <table style="width: 95%;">
+      <tr>
+        <th>Username</th>
+        <th>Package Name</th>
+        <th>Destination</th>
+        <th>Starting Date</th>
+        <th>Total Amount</th>
+        <th>Booking Status</th>
+        <th>Persons</th>
+<th></th>
+
+      </tr>
+      {% for booking in bookings_data %}
+      <tr>
+        <td>{{ booking.user_id.username }}</td>
+        <td>{{ booking.package_id.package_name }}</td>
+        <td>{{ booking.package_id.destination }}</td>
+        <td>{{ booking.booking_date }}</td>
+        <td>{{ booking.total_amount }}</td>
+
+        <td style="font-weight: bold;{% if booking.status == 'pending' %}color: orange;{% elif booking.status == 'approved' %}color: blue;{% elif booking.status == 'reject' %}color: red;{% elif booking.status == 'paid' %}color: green;{% endif %}">
+          {{ booking.status }}
+        </td>
+        
+        <td >{{ booking.no_of_people }}</td>
+   
+        <td style="text-align: center;">
+          {% if booking.review %}
+            <svg style="color: #375085;"  data-bs-toggle="collapse" data-bs-target="#bookingDetails{{ booking.id }}" aria-expanded="false" aria-controls="bookingDetails{{ booking.id }}" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+            </svg>
+       
+        </td>
+            
+            <td>
+            {% else %}
+            {% if booking.status == "pending"  %}
+            <form action="{% url 'cancel_booking' booking.id %}" method="post">
+              {% csrf_token %}
+              <button type="button" class="btn btn-danger{% if booking.status == 'approved' %} d-none{% endif %}" data-bs-toggle="modal" data-bs-target="#cancelBooking">
+                Cancel
+              </button>
+              <div class="modal fade" id="cancelBooking" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <h2 style="text-align: center;">Are you sure?</h2>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-primary"  data-bs-dismiss="modal">No</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          
+
+            
+            {% endif %}
+          
+          {% if booking.status == "approved" %}
+          <div class="d-flex" style="gap: 20px;">
+          <form action="{% url 'cancel_booking' booking.id %}" method="post">
+            {% csrf_token %}
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelBooking">
+              Cancel
+            </button>
+            <div class="modal fade" id="cancelBooking" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+              aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <h2 style="text-align: center;">Are you sure?</h2>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Yes</button>
+                  <button type="button" class="btn btn-primary"  data-bs-dismiss="modal">No</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <a href="{% url 'payments' id=booking.id %}"><button type="button"  class="btn btn-success"  data-bs-target="#staticBackdrop">
+            Payment
+          </button></a>
+        </div>
+          {% elif booking.status == "paid" %}
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Review
+          </button>
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Review/Rating</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form class="forms-sample" action="{% url 'add_review' id=booking.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleTextarea1">Review</label>
+                      <textarea class="form-control" name="review" id="exampleTextarea1" rows="2"></textarea required>
+                    </div>
+                   
+                  
+                  <div class="rate">
+                    <input type="radio" id="star5" name="rate" value="5" />
+                    <label for="star5" title="text">5 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="text">4 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="text">3 stars</label>
+                    <input type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="text">2 stars</label>
+                    <input type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="text">1 star</label>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">submit</button>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
+          {% elif booking.status == "reject" %}
+
+          {% else %}
+         
+          {% endif %}
+          {% endif %}
+
+
+          </td>
+      
+       
+      </tr>
+      <tr>
+        <td colspan="9" class="collapse" id="bookingDetails{{ booking.id }}">
+          {% if booking.review %}
+          <div style="text-align: center;">
+            <span style="font-size: 15px;color: rgb(0, 0, 0);">{{booking.review}}</span>
+            <div style="color: rgb(233, 136, 10);font-size: 20px;">
+              {% for star_value in "★★★★★"|slice:booking.rating %}
+              <span class="star">&#9733;</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </td>
+      </tr>
+
+      {% endfor %}
+    </table>
+
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+{% endblock %}

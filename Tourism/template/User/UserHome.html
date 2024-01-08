@@ -1,0 +1,277 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>package hub</title>
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'css/style-starter.css' %}">
+    <link href="//fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body id="home">
+<section class=" w3l-header-4 header-sticky">
+	<!--header-->
+	<header id="site-header" class="fixed-top">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-dark stroke">
+				<h1><a class="navbar-brand" href="{% url 'userHome' %}">
+					</span>Package hub
+				</a></h1>
+				<button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+					<span class="navbar-toggler-icon fa icon-close fa-times"></span>
+					
+				</button>
+	  
+				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+					<ul class="navbar-nav ml-lg-5">
+						<li class="nav-item active">
+							<a class="nav-link" href="{% url 'userHome' %}">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item @@services__active">
+							<a class="nav-link" href="{% url 'user_packages' %}">packages</a>
+						</li>
+						<li class="nav-item @@contact__active">
+							<a class="nav-link" href="{% url 'user_contact' %}">Contact</a>
+						</li>
+            <li class="nav-item @@contact__active">
+							<a class="nav-link" href="{% url 'userviewbookings' %}">Bookings</a>
+						</li>
+						
+<!-- dropdown -->
+            <div class="dropdown">
+              <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="" width="30px" src="../../static/images/prof.png" alt="Profile image"> </a>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-header text-center">
+                  <p class="mb-1 mt-3 font-weight-semibold">{{ User.username }}</p>
+                  <p class="font-weight-light text-muted mb-0">{{ User.email }}</p>
+                </div>
+                <a class="dropdown-item" href="{% url 'edit_userprofile' %}">My Profile <span class="badge badge-pill badge-danger"></span><i
+                    class="dropdown-item-icon ti-dashboard"></i></a>
+                
+                <a href="{% url 'Logout' %}" class="dropdown-item">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
+              </div>
+            </div>
+<!-- dropdown -->              
+            </div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	  </header>
+	<!--/header-->
+</section>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script> <!-- Common jquery plugin -->
+<!--bootstrap working-->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+{% block content %}
+<section class="w3l-main-slider" id="home">
+  <!-- main-slider -->
+  <div class="companies20-content">
+    <div class="owl-one owl-carousel owl-theme">
+      <div class="item text-center">
+        <li>
+          <div class="slider-info banner-view bg bg2" data-selector=".bg.bg2">
+            <div class="banner-info">
+              <div class="container">
+                <div class="banner-info-bg mr-auto">
+                  <h5>Welcome<br>
+                    Let’s Travel</h5>
+                  
+                  <a class="btn btn-theme2 mt-lg-5 mt-4" href="{% url 'user_packages' %}">Book Your Travel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </div>
+      <div class="item text-center">
+        <li>
+          <div class="slider-info  banner-view banner-top1 bg bg2" data-selector=".bg.bg2">
+            <div class="banner-info">
+              <div class="container">
+                <div class="banner-info-bg mr-auto">
+                  <h5>Welcome <br>
+                     Let’s Travel </h5>
+                 
+                   <a class="btn btn-theme2 mt-lg-5 mt-4" href="{% url 'user_packages' %}">Book Your Travel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </div>
+      <div class="item text-center">
+        <li>
+          <div class="slider-info  banner-view banner-top2 bg bg2" data-selector=".bg.bg2">
+            <div class="banner-info">
+              <div class="container">
+                <div class="banner-info-bg mr-auto">
+                  <h5>Welcome<br>
+                   Let’s Travel</h5>
+                  
+                   <a class="btn btn-theme2 mt-lg-5 mt-4" href="{% url 'user_packages' %}">Book Your Travel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'js/owl.carousel.js' %}"></script>
+  <!-- script for -->
+  <script>
+    $(document).ready(function () {
+      $('.owl-one').owlCarousel({
+        loop: true,
+        margin: 0,
+        nav: false,
+        responsiveClass: true,
+        autoplay: true,
+        autoplayTimeout: 8000,
+        autoplaySpeed: 3000,
+        autoplayHoverPause: false,
+        responsive: {
+          0: {
+            items: 1,
+            nav: false
+          },
+          480: {
+            items: 1,
+            nav: false
+          },
+          667: {
+            items: 1,
+            nav: true
+          },
+          1000: {
+            items: 1,
+            nav: true
+          }
+        }
+      })
+    })
+  </script>
+  <!-- //script -->
+  <!-- /main-slider -->
+</section>
+
+
+
+<section class="w3l-covers-18 ">
+        <div class="covers-main editContent">
+            <div class="container">
+              <div class="main-titles-head ">
+                <h3 class="header-name">Top  Packages
+                </h3>
+              </div>
+
+<div style="display: flex;flex-wrap: wrap;">
+
+
+              {% for package in packages|slice:":3" %}
+                <div class="col-lg-4 col-md-6">
+                  <div class="img-box" style="margin-top: 20px;    height: 518px;">
+                    <img src="{{ package.img1.url }}" width="400px" height="200px" alt="package1" class="img-responsive ">
+                    <h5 class="my-2"><a href="{% url 'packageDetails' id=package.id %}">{{ package.package_name }}</a></h5>
+                    <div class="blog-date"> 
+                      <p class="pos-date">{{ package.no_of_days}} DAYS and {{ package.no_of_night}} NIGHT</p> <p class="pos-date text-right"></p>
+                    </div>
+                      <div class="top-gap">
+                       <h5>₹{{ package.price }}/per person</h5>
+                        <a href="{% url 'packageDetails' id=package.id %}" class="icon text-center"><span class="fa fa-chevron-right"></span></a>
+                      </div>
+                  </div>
+                </div>
+              {% endfor %}
+
+            </div>
+
+
+              
+                  </div>
+                  </div>
+                </div> 
+        </div>
+    </section>
+
+{% endblock %}
+
+<section class="w3l-footer-29-main">
+	<div class="footer-29 py-5 ">
+	  <div class="container">
+		  <div class="grid-col-4 footer-top-29">
+			  <div class="footer-list-29 footer-1">
+				  <h2 class="footer-title-29">Contact Us</h2>
+  				<ul>
+	  				<li><p><span class="fa fa-map-marker"></span>Mary matha arts and science college,Mananthavady,<br>
+		  				Wayanad,Kerala</p></li>
+			  		<li><a href="tel:+7-800-999-800"><span class="fa fa-phone"></span> +(21)-255-999-8888</a></li>
+				  	<li><a href="" class="mail"><span class="fa fa-envelope-open-o"></span> example@mail.com</a></li>
+  				</ul>
+	  			<div class="main-social-footer-29">
+		  			<a href="#facebook" class="facebook"><span class="fa fa-facebook"></span></a>
+			  		<a href="#twitter" class="twitter"><span class="fa fa-twitter"></span></a>
+				  	<a href="#instagram" class="instagram"><span class="fa fa-instagram"></span></a>
+	  				<a href="#linkedin" class="linkedin"><span class="fa fa-linkedin"></span></a>
+  				</div>
+		  	</div>
+			  <div class="footer-list-29 footer-3"></div>
+  			<div class="footer-list-29 footer-3"></div>
+	  		<div class="footer-list-29 footer-3">
+          <div class="properties">
+            <h6 class="footer-title-29">Latest Gallery</h6>
+            <div class="images-col">
+              <img src="{% static 'images/gallery/blog1.jpg' %}" class="img-responsive" alt="">
+              <img src="{% static 'images/gallery/blog2.jpg' %}" class="img-responsive" alt="">
+              <img src="{% static 'images/gallery/blog3.jpg' %}" class="img-responsive" alt="">
+              <img src="{% static 'images/gallery/blog4.jpg' %}" class="img-responsive" alt="">
+              <img src="{% static 'images/gallery/blog5.jpg' %}" class="img-responsive" alt="">
+              <img src="{% static 'images/gallery/blog6.png' %}" class="img-responsive" alt="">
+            </div>
+          </div>
+			  </div>
+			</div>
+    </div>
+	</div>
+</section>
+
+<!-- move top -->
+<button onclick="topFunction()" id="movetop" title="Go to top">
+	<span class="fa fa-chevron-up"></span>
+</button>
+<script>
+	// When the user scrolls down 20px from the top of the document, show the button
+	window.onscroll = function () {
+		scrollFunction()
+	};
+
+	function scrollFunction() {
+		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+			document.getElementById("movetop").style.display = "block";
+		} else {
+			document.getElementById("movetop").style.display = "none";
+		}
+	}
+
+	// When the user clicks on the button, scroll to the top of the document
+	function topFunction() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	}
+</script>
+<!-- /move top -->
+
+</body>
+
+</html>

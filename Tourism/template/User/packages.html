@@ -1,0 +1,65 @@
+{% extends 'User/UserHome.html' %}
+{% block content %}
+<section class="w3l-inner-banner-main">
+    <div class="about-inner services editContent">
+        <div class="container">   
+
+        <div class="breadcrumbs-sub">
+            <ul class="breadcrumbs-custom-path">
+                <li class="right-side propClone"><a href="index.html" class="editContent"></a> <p></li>
+                <li class="active editContent"></li>
+            </ul>
+            </div>
+</div>
+</div>
+</section>
+
+<section class="w3l-services-two" id="services">
+    <div class="service-single-page editContent">
+      <form action="{% url 'usersearch_package' %}" method="get">
+        {% csrf_token %}
+            <div class="input-group" style="width: 400px; 
+            margin-left: 35%;
+            margin-top: 15px;">
+              <input type="search" name="search" class="form-control rounded" placeholder="Search by Destination" aria-label="Search" aria-describedby="search-addon" 
+              quired />
+              <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+          </div>
+        </form>
+
+				<section class="w3l-covers-18 ">
+                    <div class="covers-main editContent">
+                        <div class="container">
+                          <div class="main-titles-head ">
+                            <h3 class="header-name">Packages
+                            </h3>
+                          </div>
+            
+            <div style="display: flex;flex-wrap: wrap;">
+            
+            
+                          {% for package in packages %}
+                            <div class="col-lg-4 col-md-6">
+                              <div class="img-box" style="margin-top: 20px;">
+                                <img src="{{ package.img1.url }}" width="400px" height="200px" alt="package1" class="img-responsive ">
+                                <h5 class="my-2"><a href="{% url 'packageDetails' id=package.id %}">{{ package.package_name }}</a></h5>
+                                <div class="blog-date"> 
+                                  <p class="pos-date">{{ package.no_of_days}} DAYS and {{ package.no_of_night}} NIGHT</p> <p class="pos-date text-right"></p>
+                                </div>
+                                  <div class="top-gap">
+                                   <h5>₹{{ package.price }}/per person</h5>
+                                    <a href="{% url 'packageDetails' id=package.id %}" class="icon text-center"><span class="fa fa-chevron-right"></span></a>
+                                  </div>
+                              </div>
+                            </div>
+                          {% endfor %}
+            
+                        </div>
+                              </div>
+                              </div>
+                            </div> 
+                    </div>
+                </section>
+</section>
+
+{% endblock %}

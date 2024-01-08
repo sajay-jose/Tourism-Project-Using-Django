@@ -1,0 +1,134 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<section class="w3l-inner-banner-main">
+    <div class="about-inner services editContent">
+        <div class="container">   
+
+        <div class="breadcrumbs-sub">
+            <ul class="breadcrumbs-custom-path">
+                <li class="right-side propClone"><a href="index.html" class="editContent"></a> <p></li>
+                <li class="active editContent"></li>
+            </ul>
+            </div>
+</div>
+</div>
+</section>
+
+<section class="w3l-services-two" id="services">
+    <div class="service-single-page editContent">
+		<form action="{% url 'search_package' %}" method="get">
+			{% csrf_token %}
+					<div class="input-group" style="width: 400px; 
+					margin-left: 35%;
+					margin-top: 15px;">
+						<input type="search" name="search" class="form-control rounded" placeholder="Search by Destination" aria-label="Search" aria-describedby="search-addon" required />
+						<button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+				</div>
+			</form>
+				<section class="w3l-covers-18 ">
+                    <div class="covers-main editContent">
+                        <div class="container">
+                          <div class="main-titles-head ">
+                            <h3 class="header-name">Packages
+                            </h3>
+                          </div>
+					
+            
+            <div style="display: flex;flex-wrap: wrap;">
+                          {% for package in packages %}
+                            <div class="col-lg-4 col-md-6">
+                              <div class="img-box" style="margin-top: 20px;">
+                                <img src="{{ package.img1.url }}" width="400px" height="200px" alt="package1" class="img-responsive ">
+                                <h5 class="my-2"><a href="{% url 'Login' %}">{{ package.package_name }}</a></h5>
+                                <div class="blog-date"> 
+                                  <p class="pos-date">{{ package.no_of_days}} DAYS and {{ package.no_of_night}} NIGHT</p> <p class="pos-date text-right"></p>
+                                </div>
+                                  <div class="top-gap">
+                                   <h5>₹{{ package.price }}/per person</h5>
+                                    <a href="{% url 'Login' %}" class="icon text-center"><span class="fa fa-chevron-right"></span></a>
+                                  </div>
+                              </div>
+                            </div>
+                          {% endfor %}
+            
+                        </div>
+            
+            
+                          
+                              </div>
+                              </div>
+                            </div> 
+                    </div>
+                </section>
+</section>
+
+{% endblock %}
+<section class="w3l-footer-29-main">
+	<div class="footer-29 py-5 ">
+	  <div class="container">
+		  <div class="grid-col-4 footer-top-29">
+			  <div class="footer-list-29 footer-1">
+				  <h2 class="footer-title-29">Contact Us</h2>
+  				<ul>
+	  				<li><p><span class="fa fa-map-marker"></span>Mary matha arts and science college,Mananthavady,<br>
+		  				Wayanad,Kerala</p></li>
+			  		<li><a href="tel:+7-800-999-800"><span class="fa fa-phone"></span> +(21)-255-999-8888</a></li>
+				  	<li><a href="" class="mail"><span class="fa fa-envelope-open-o"></span> example@mail.com</a></li>
+  				</ul>
+	  			<div class="main-social-footer-29">
+		  			<a href="#facebook" class="facebook"><span class="fa fa-facebook"></span></a>
+			  		<a href="#twitter" class="twitter"><span class="fa fa-twitter"></span></a>
+				  	<a href="#instagram" class="instagram"><span class="fa fa-instagram"></span></a>
+	  				<a href="#linkedin" class="linkedin"><span class="fa fa-linkedin"></span></a>
+  				</div>
+		  	</div>
+			  <div class="footer-list-29 footer-3"></div>
+  			<div class="footer-list-29 footer-3"></div>
+	  		<div class="footer-list-29 footer-3">
+          <div class="properties">
+            <h6 class="footer-title-29">Latest Gallery</h6>
+            <div class="images-col">
+              <img src="assets/images/blog1.jpg" class="img-responsive" alt="">
+              <img src="assets/images/blog2.jpg" class="img-responsive" alt="">
+              <img src="assets/images/blog3.jpg" class="img-responsive" alt="">
+              <img src="assets/images/blog4.jpg" class="img-responsive" alt="">
+              <img src="assets/images/blog5.jpg" class="img-responsive" alt="">
+              <img src="assets/images/blog6.png" class="img-responsive" alt="">
+            </div>
+          </div>
+			  </div>
+			</div>
+    </div>
+	</div>
+</section>
+
+<!-- move top -->
+<button onclick="topFunction()" id="movetop" title="Go to top">
+	<span class="fa fa-chevron-up"></span>
+</button>
+<script>
+	// When the user scrolls down 20px from the top of the document, show the button
+	window.onscroll = function () {
+		scrollFunction()
+	};
+
+	function scrollFunction() {
+		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+			document.getElementById("movetop").style.display = "block";
+		} else {
+			document.getElementById("movetop").style.display = "none";
+		}
+	}
+
+	// When the user clicks on the button, scroll to the top of the document
+	function topFunction() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+	}
+</script>
+<!-- /move top -->
+
+</body>
+
+</html>

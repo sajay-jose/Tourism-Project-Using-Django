@@ -1,0 +1,113 @@
+{% extends 'Agency/index.html' %}
+{% block content %}
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title" style="font-size: xx-large;">Add Health Assistance</h4>
+              <form class="form-sample" action="{% url 'health_assistance' %}" method="post">
+                {% csrf_token %}
+                <p class="card-description"> Personal info </p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">First Name</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="first_name" class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Last Name</label>
+                      <div class="col-sm-9">
+                        <input type="text" name="last_name" class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Gender</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" name="gender">
+                          <option>Male</option>
+                          <option>Female</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Date of Birth</label>
+                      <div class="col-sm-9">
+                        <input type="date" name="date" class="form-control" placeholder="dd/mm/yyyy" />
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Contact </label>
+                    <div class="col-sm-9">
+                      <input type="text" name="phone_number" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">profession </label>
+                    <div class="col-sm-9">
+                      <input type="text" name="qualification" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+              
+                <button type="submit" class="btn btn-outline-primary btn-fw">
+                  Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12  grid-margin ">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title" style="font-size: xx-large;">View Health Assistance </h4>
+              
+              <table class="table table-hover">
+                <thead>
+                 
+                  <tr>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>DOB</th>
+                    <th>Contact</th>
+                    <th>profession</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for health_assistant in health_assistants %}
+                  <tr>
+                    <td>{{health_assistant.first_name}}</td>
+                    <td>{{health_assistant.first_name}}</td>
+                    <td>{{health_assistant.gender}}</td>
+                    <td>{{health_assistant.phone_number}}</td>
+                    <td>{{health_assistant.qualification}}</td>
+                  </tr>
+                  {% endfor %} 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

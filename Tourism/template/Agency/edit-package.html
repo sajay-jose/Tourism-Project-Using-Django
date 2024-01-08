@@ -1,0 +1,123 @@
+{% extends 'Agency/index.html' %}
+{% block content %}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+            <div class="card-body">
+                <h4 class="card-title " style="font-size: xx-large;">Edit Package</h4>
+                <form class="form-sample" action="{% url 'edit_package' id=packages.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Package Name</label>
+                        <div class="col-sm-9">
+                        <input type="text" name="package_name" value="{{packages.package_name}}" class="form-control" />
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Source</label>
+                        <div class="col-sm-9">
+                        <input type="text" name="source" value="{{packages.source}}" class="form-control" />
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Destination</label>
+                        <div class="col-sm-9">
+                        <input type="text" name="destination" value="{{packages.destination}}" class="form-control" />
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Number of days </label>
+                        <div class="col-sm-9">
+                        <input type="number" name="no_of_days" value="{{packages.no_of_days}}" class="form-control" />
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Number of nights </label>
+                        <div class="col-sm-9">
+                            <input type="number" name="no_of_night" value="{{packages.no_of_night}}" class="form-control" />
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Price</label>
+                        <div class="col-sm-9">
+                        <input type="text" name="price" value="{{packages.price}}" class="form-control" />
+                        </div>
+                    </div>
+                    </div>                      
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Description</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="description" value="{{packages.description}}" class="form-control" />
+                        </div>
+                        </div>
+                    </div>                      
+                    </div>
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Image 1</label>
+                        <div class="col-sm-9">
+                        <input type="file" name="img1" value="{{packages.img1}}" class="form-control" />
+                        </div>
+                    </div>
+                    </div>                      
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Image 2</label>
+                        <div class="col-sm-9">
+                        <input type="file" name="img2" value="{{packages.img2}}" class="form-control" />
+                        </div>
+                    </div>
+                    </div>                      
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Image 3</label>
+                        <div class="col-sm-9">
+                        <input type="file" name="img3" value="{{packages.img2}}" class="form-control" />
+                        </div>
+                    </div>
+                    </div>                      
+                </div>
+                <button type="submit" class="btn btn-outline-primary btn-fw">
+                    <i class="mdi mdi-file-document"></i>Submit
+                </button>
+                </form>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>        
+{% endblock %}
