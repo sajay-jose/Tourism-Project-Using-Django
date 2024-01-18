@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import CustomUser, Package, Booking, HealthAssistant
+from django.contrib.auth.models import Group
 
 # Register your models here.
 
@@ -56,9 +57,5 @@ admin.site.register(Package, PackageDetails)
 admin.site.register(Booking, BookingDetails)
 admin.site.register(HealthAssistant)
 
-
-
-
-
-
+admin.site.unregister(Group)
 admin.site.site_header = 'MARY MATHA TOURISM PACKAGE HUB'
