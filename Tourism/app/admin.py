@@ -34,7 +34,7 @@ class PackageDetails(admin.ModelAdmin):
 
 
 class BookingDetails(admin.ModelAdmin):
-    list_display = ["user_username", "package_name", "status"]
+    list_display = ["user_username", "package_name", "agency_name", "status"]
     list_filter = ["status"]
     search_fields = ["user_id__username", "package_id__package_name"]  # Update to use user_id__username
     list_per_page = 10
@@ -45,10 +45,14 @@ class BookingDetails(admin.ModelAdmin):
 
     def package_name(self, obj):
         return obj.package_id.package_name
+    
+    def agency_name(self, obj):
+        return obj.package_id.user_id.username
 
     # Customize the column headers
     user_username.short_description = "Username"
     package_name.short_description = "Package Name"
+    agency_name.short_description = "Agency Name"
 
 
 

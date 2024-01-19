@@ -98,15 +98,19 @@ def search_package(request):
 @login_required(login_url=Login)
 def agencyindex(request):
     User = CustomUser.objects.get(id=request.user.id)
-    booking_data = Booking.objects.filter(package_id__user_id=request.user.id)
+    booking_data = Booking.objects.filter(package_id__user_id=request.user.id).order_by('-status')
+    pending_bookings_count = Booking.objects.filter(status='pending').count()
     
 
     context = {
         'bookings':booking_data,
-        'User':User
+        'User':User,
+        'pending_bookings_count':pending_bookings_count
     }
     return render(request, 'Agency/index.html', context)
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=Login)
 def rating(request,id):
     booking_data = Booking.objects.get(id=id)
     print(booking_data)
@@ -116,7 +120,7 @@ def rating(request,id):
     return render(request, 'Agency/rating.html', context)
 
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=Login)    
 def edit_bookingstatus(request,id):
     booking = Booking.objects.get(id=id)
@@ -205,6 +209,14 @@ def health_assistance(request):
             "User":user
         }
         return render(request, 'Agency/health-assistant.html', context)
+
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=Login)   
+def delete_healthassistant(request,id):
+    data = HealthAssistant.objects.get(id=id)
+    data.delete()
+    return redirect(health_assistance)
     
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=Login)
@@ -236,6 +248,7 @@ def edit_package(request, id):
         }    
         return render(request, 'Agency/edit-package.html', context)
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=Login)
 def delete_package(request, id):
     data = Package.objects.get(id=id)
@@ -243,13 +256,7 @@ def delete_package(request, id):
     return redirect(add_package)
 
 
-# @login_required(login_url=Login)
-# def agencyviewbookings(request):
-#     data = Booking.objects.filter(package_id__user_id=request.user.id)
-#     context = {
-#         'bookings':data
-#     }
-#     return render(request, 'User/booking.html', context)
+
 
 
 
@@ -272,6 +279,7 @@ def userHome(request):
     }
     return render(request, 'User/UserHome.html', context)
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=Login)
 def edit_userprofile(request):
     User = CustomUser.objects.get(id=request.user.id)
@@ -287,13 +295,14 @@ def edit_userprofile(request):
         }
         return render(request, 'User/userprofile.html', context)
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=Login)
 def user_packages(request):
     User = CustomUser.objects.get(id=request.user.id)
     data = Package.objects.all()
     return render(request, 'User/packages.html', {'packages':data, 'User':User})
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=Login)
 def usersearch_package(request):
     User = CustomUser.objects.get(id=request.user.id)
@@ -303,12 +312,13 @@ def usersearch_package(request):
             packages = Package.objects.filter(destination__icontains=search_query)
             return render(request, 'User/packages.html', {'packages':packages, 'User':User})
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=Login)
 def user_contact(request):
     User = CustomUser.objects.get(id=request.user.id)
     return render(request, 'User/contact.html', {'User':User})
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=Login)
 def packageDetails(request,id):
     User = CustomUser.objects.get(id=request.user.id)
@@ -353,14 +363,14 @@ def packageDetails(request,id):
         }
         return render(request, 'User/PackageDetails.html', context)
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=Login)
 def userviewbookings(request):
     User = CustomUser.objects.get(id=request.user.id)
-    bookings_data = Booking.objects.filter(user_id=User)
+    bookings_data = Booking.objects.filter(user_id=User).order_by('-status','-date')
     return render(request, 'User/Booking.html', {'bookings_data':bookings_data, 'User':User})
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=Login)
 def cancel_booking(request,id):
     bookings_data = Booking.objects.get(id=id)
@@ -369,7 +379,7 @@ def cancel_booking(request,id):
         bookings_data.save()
         return redirect(userviewbookings)
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=Login)
 def add_review(request,id):
     booking = Booking.objects.get(id=id)
@@ -388,7 +398,7 @@ def add_review(request,id):
 
     # return render(request, 'your_template.html', {'form': form, 'package': package})
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=Login)
 def payments(request,id):
     User = CustomUser.objects.get(id=request.user.id)

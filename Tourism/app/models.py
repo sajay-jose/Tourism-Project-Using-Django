@@ -61,11 +61,7 @@ class Booking(models.Model):
     review = models.CharField(max_length=200, null=True, blank=True)
 
 
-# class Reviews(models.Model):
-#     user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-#     booking_id = models.ForeignKey(Booking, on_delete=models.CASCADE)
-#     rating = models.IntegerField()
-#     review = models.CharField(max_length=200)
+
 
 
 

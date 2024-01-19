@@ -126,7 +126,9 @@
         <div>{{bookings.total_amount }}</div>
         {% if bookings.review %}
         <div style="font-size: 20px;font-weight: bold;">Review</div>
-        <div>{{bookings.review }}</div>
+        <div style="
+        width: 494px;
+    ">{{bookings.review }}</div>
         
         <div style="color: rgb(233, 136, 10);font-size: 20px;">
           {% for star_value in "★★★★★"|slice:bookings.rating %}

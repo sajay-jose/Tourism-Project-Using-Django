@@ -43,6 +43,7 @@
                                 <h5 class="my-2"><a href="{% url 'Login' %}">{{ package.package_name }}</a></h5>
                                 <div class="blog-date"> 
                                   <p class="pos-date">{{ package.no_of_days}} DAYS and {{ package.no_of_night}} NIGHT</p> <p class="pos-date text-right"></p>
+                                  <p class="pos-date">Destination: 	{{ package.destination}} </p> <p class="pos-date text-right"></p>
                                 </div>
                                   <div class="top-gap">
                                    <h5>₹{{ package.price }}/per person</h5>

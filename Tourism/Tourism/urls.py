@@ -35,13 +35,14 @@ urlpatterns = [
 
     path('add_package', views.add_package, name="add_package"),
     path('health_assistance', views.health_assistance, name="health_assistance"),
+    path('delete_healthassistant/<int:id>', views.delete_healthassistant, name="delete_healthassistant"),
     path('agencyindex', views.agencyindex, name="agencyindex"),
     path('edit_bookingstatus/<int:id>', views.edit_bookingstatus, name="edit_bookingstatus"),
     path('edit_agencyprofile', views.edit_agencyprofile, name="edit_agencyprofile"),
     path('edit_package/<int:id>', views.edit_package, name="edit_package"),
     path('delete_package/<int:id>', views.delete_package, name="delete_package"),
     path('rating/<int:id>', views.rating, name="rating"),
-    # path('agencyviewbookings', views.agencyviewbookings, name="agencyviewbookings"),
+
 
 
     path('userHome', views.userHome, name="userHome"),

@@ -6,7 +6,7 @@
         <div class="col-12 grid-margin">
             <div class="card">
             <div class="card-body">
-                <h4 class="card-title " style="font-size: xx-large;">Edit Package</h4>
+                <h4 class="card-title " style="font-size: xx-large;">Profile</h4>
                 <form class="form-sample" action="{% url 'edit_agencyprofile' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-outline-primary btn-fw">
-                        <i class="mdi mdi-file-document"></i>Submit
+                            Submit
                     </button>
                 </form>
             </div>
